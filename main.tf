@@ -21,7 +21,7 @@ module "vpc" {
 
 # Use the Getaway module
 module "getaway" {
-  source = "getaway"
+  source = "./getaway"
   vpc_id = module.vpc.vpc_id
   aws_public = module.vpc.aws_public.id
 }
