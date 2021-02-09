@@ -10,6 +10,10 @@ variable "security_group_id" {
   type = string
 }
 
+output "aws_public_ip" {
+  value = ""
+}
+
 resource "aws_instance" "MYSQL" {
   ami                    = "ami-0a91cd140a1fc148a"
   instance_type          = "t2.micro"
@@ -33,3 +37,10 @@ resource "aws_instance" "NGINX" {
     Name = "NGINX"
   }
 }
+
+connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("terraform.pem")
+  }
