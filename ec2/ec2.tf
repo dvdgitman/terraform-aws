@@ -21,7 +21,7 @@ resource "aws_instance" "MYSQL" {
   }
 
 }
-#create aws ec2 instance named NGINX with public subnet
+#create aws ec2 instance named WORDPRESS with public subnet
 resource "aws_instance" "WORDPRESS" {
   ami                    = "ami-0a91cd140a1fc148a"
   instance_type          = "t2.micro"
@@ -33,7 +33,7 @@ resource "aws_instance" "WORDPRESS" {
     Name = "WORDPRESS"
   }
 
-#connect to the NGINX ec2 instance and install nginx via SSH connection
+#connect to the WORDPRESS ec2 instance and install WORDPRESS & docker via SSH connection
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",
