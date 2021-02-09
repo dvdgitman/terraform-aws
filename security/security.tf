@@ -18,6 +18,7 @@ resource "aws_security_group" "terraform" {
   description = "Allow MSQL and NGINX inbound traffic"
   vpc_id      = var.vpc_id
 
+# add dynamic ingress rules list
  dynamic "ingress" {
     iterator = port
     for_each = var.ingresses

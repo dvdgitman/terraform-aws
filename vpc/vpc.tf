@@ -1,3 +1,4 @@
+# use aws internet gateway as variable
 variable "aws_internet_gateway" {
   type = string
 }
@@ -26,7 +27,7 @@ resource "aws_subnet" "TerraPrv" {
     Name = "TerraPrv"
   }
 }
-# output private subnet as variable
+# output private subnet to use as variable
 output aws_subnet {
   value = aws_subnet.TerraPrv
 }
@@ -41,7 +42,7 @@ resource "aws_subnet" "TerraPub" {
     Name = "TerraPub"
   }
 }
-# output public subnet as variable
+# output public subnet to use as variable
 output aws_public {
   value = aws_subnet.TerraPub
 }

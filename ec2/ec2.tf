@@ -33,6 +33,13 @@ resource "aws_instance" "NGINX" {
     Name = "NGINX"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get update",
+      "sudo apt-get -y install nginx"
+    ]
+  }
+
   connection {
     type        = "ssh"
     host        = aws_instance.NGINX.public_ip
@@ -40,8 +47,8 @@ resource "aws_instance" "NGINX" {
     private_key = file("terraform.pem")
   }
 
-
-
 }
+
+
 
 
