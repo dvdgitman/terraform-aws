@@ -16,12 +16,12 @@ provider "aws" {
 # Use the VPC module
 module "vpc" {
   source = "./vpc"
-  aws_internet_gateway = module.getway.aws_internet_gateway
+  aws_internet_gateway = module.getaway.aws_internet_gateway
 }
 
 # Use the Getaway module
-module "getway" {
-  source = "./getway"
+module "getaway" {
+  source = "getaway"
   vpc_id = module.vpc.vpc_id
   aws_public = module.vpc.aws_public.id
 }
