@@ -18,6 +18,11 @@ resource "aws_subnet" "TerraPrv" {
     Name = "TerraPrv"
   }
 }
+
+output aws_subnet {
+  value = aws_subnet.TerraPrv
+}
+
 # Create a Public Subnet
 resource "aws_subnet" "TerraPub" {
   vpc_id     = aws_vpc.NewVpc.id
@@ -26,6 +31,10 @@ resource "aws_subnet" "TerraPub" {
   tags = {
     Name = "TerraPub"
   }
+}
+
+output aws_public {
+  value = aws_subnet.TerraPub
 }
 
 

@@ -2,7 +2,12 @@ variable "vpc_id" {
   type = string
 }
 
-resource "aws_security_group" "MySQL" {
+output "security_group_id" {
+       value = aws_security_group.terraform.id
+}
+
+
+resource "aws_security_group" "terraform" {
   name        = "MySQL"
   description = "Allow MSQL inbound traffic"
   vpc_id      = var.vpc_id
@@ -39,6 +44,6 @@ resource "aws_security_group" "MySQL" {
   }
 
   tags = {
-    Name = "MySQL"
+    Name = "terraform"
   }
 }
