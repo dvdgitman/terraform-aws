@@ -1,3 +1,4 @@
+# Download AWS provider from hashicorp
 terraform {
   required_providers {
     aws = {
@@ -12,18 +13,26 @@ provider "aws" {
   profile = "default"
 }
 
-# Bring the VPC module
+# Use the VPC module
 module "vpc" {
   source = "./vpc"
+  aws_internet_gateway = module.getway.aws_internet_gateway
 }
 
-# Bring the Security module
+# Use the Getaway module
+module "getway" {
+  source = "./getway"
+  vpc_id = module.vpc.vpc_id
+  aws_public = module.vpc.aws_public.id
+}
+
+# Use the Security module
 module "security" {
   source = "./security"
   vpc_id = module.vpc.vpc_id
 }
 
-# Bring the Instance
+# Use the Instance
 module "ec2" {
   source = "./ec2"
   aws_public = module.vpc.aws_public.id

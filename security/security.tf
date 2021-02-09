@@ -1,39 +1,32 @@
+# use VPC ID as variable
 variable "vpc_id" {
   type = string
 }
-
+# output security group id to use it as variable
 output "security_group_id" {
        value = aws_security_group.terraform.id
 }
+# use ingresses protocols as variables
+variable "ingresses" {
+  type    = list(number)
+  default = [80, 443, 22, 3306]
+}
 
-
+# create aws security group with MYSQL,HTTPS,SSH inbound rules
 resource "aws_security_group" "terraform" {
   name        = "MySQL"
-  description = "Allow MSQL inbound traffic"
+  description = "Allow MSQL and NGINX inbound traffic"
   vpc_id      = var.vpc_id
 
-  ingress {
-    description = "port 443 for HTTPS"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description = "port 3306 for MYSQL "
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-   ingress {
-    description = "port 22 for SSH "
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+ dynamic "ingress" {
+    iterator = port
+    for_each = var.ingresses
+    content {
+      from_port   = port.value
+      to_port     = port.value
+      protocol    = "TCP"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 
   egress {
@@ -44,6 +37,6 @@ resource "aws_security_group" "terraform" {
   }
 
   tags = {
-    Name = "terraform"
+    "Terraform" = "true"
   }
 }
