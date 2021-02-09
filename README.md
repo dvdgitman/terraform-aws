@@ -1,10 +1,10 @@
 # terraform-aws
-This is a terraform script that will create a WORDPRESS instance that uses MySQL DB from different EC2 instance using AWS providers and modules.
+This is a terraform script that will create a WORDPRESS instance that uses MySQL DB from different EC2 instance using AWS providers and modules.  
 This script will also create 2 subnets and 1 vpn.  
 a public subnet for Wordpress,  
 and one private subnet for MySQL DB.  
 
-First you will need to install AWS CLI 2 , via the amazon official site.
+First you will need to install AWS CLI 2 , via the amazon official site.  
 
 Use in commend line :
 
