@@ -1,11 +1,12 @@
+#use VPC id as a variable
 variable "vpc_id" {
   type = string
 }
-
+#use aws public id as a variable
 variable "aws_public" {
   type = string
 }
-
+#create new internet gateway
 resource "aws_internet_gateway" "test-env-gw" {
   vpc_id = var.vpc_id
   tags = {
