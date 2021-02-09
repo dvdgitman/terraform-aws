@@ -24,6 +24,8 @@ module "gateway" {
   source = "./gateway"
   vpc_id = module.vpc.vpc_id
   aws_public = module.vpc.aws_public.id
+  aws_subnet = module.vpc.aws_subnet.id
+
 }
 
 # Use the Security module

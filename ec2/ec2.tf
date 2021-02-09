@@ -15,34 +15,39 @@ resource "aws_instance" "MYSQL" {
   subnet_id              = var.aws_subnet
   vpc_security_group_ids = [var.security_group_id]
   key_name = "terraform"
-
+  user_data = file("configure_mysql.sh")
   tags = {
     Name = "MYSQL"
   }
+
 }
 #create aws ec2 instance named NGINX with public subnet
-resource "aws_instance" "NGINX" {
+resource "aws_instance" "WORDPRESS" {
   ami                    = "ami-0a91cd140a1fc148a"
   instance_type          = "t2.micro"
   subnet_id              = var.aws_public
   vpc_security_group_ids = [var.security_group_id]
   associate_public_ip_address = true
   key_name = "terraform"
-
   tags = {
-    Name = "NGINX"
+    Name = "WORDPRESS"
   }
 
+#connect to the NGINX ec2 instance and install nginx via SSH connection
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get update",
-      "sudo apt-get -y install nginx"
+      "sudo apt install docker.io -y",
+      "sudo systemctl restart docker",
+      "sudo systemctl enable docker",
+      "sudo docker pull wordpress",
+      "sudo docker run --name wordpress -p 80:80 -e WORDPRESS_DB_HOST=${aws_instance.MYSQL.private_ip} -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=root -e WORDPRESS_DB_NAME=wordpressdb -d wordpress"
     ]
-  }
+ }
 
   connection {
     type        = "ssh"
-    host        = aws_instance.NGINX.public_ip
+    host        = aws_instance.WORDPRESS.public_ip
     user        = "ubuntu"
     private_key = file("terraform.pem")
   }
