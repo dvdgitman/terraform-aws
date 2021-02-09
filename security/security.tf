@@ -2,8 +2,8 @@ variable "vpc_id" {
   type = string
 }
 
-resource "aws_security_group" "MySQL_security_group" {
-  name        = "MySQL_security_group"
+resource "aws_security_group" "MySQL" {
+  name        = "MySQL"
   description = "Allow MSQL inbound traffic"
   vpc_id      = var.vpc_id
 
@@ -39,6 +39,6 @@ resource "aws_security_group" "MySQL_security_group" {
   }
 
   tags = {
-    Name = "MySQL_security_group"
+    Name = "MySQL"
   }
 }

@@ -1,14 +1,13 @@
-# Create VPC
+# Create a VPC
+output "vpc_id" {
+  value = aws_vpc.NewVpc.id
+}
+
 resource "aws_vpc" "NewVpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
     Name = "NewVPC"
   }
-}
-
-# Output VPC ID
-output "vpc_id" {
-  value = aws_vpc.NewVpc.id
 }
 
 # Create a Private Subnet
@@ -28,5 +27,6 @@ resource "aws_subnet" "TerraPub" {
     Name = "TerraPub"
   }
 }
+
 
 
