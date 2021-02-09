@@ -12,10 +12,10 @@ aws configure
 
 Input the following data : 
 
-AWS Access Key ID [None]: accesskey
-AWS Secret Access Key [None]: secretkey
-Default region name [None]: your required region name
-Default output format [None]: json
+AWS Access Key ID [None]: accesskey  
+AWS Secret Access Key [None]: secretkey  
+Default region name [None]: your required region name    
+Default output format [None]: json  
 
 Generate key-pair for EC2.  
 Write down the key-pair name in ec2.tf in lines [17, 31, 52]  
