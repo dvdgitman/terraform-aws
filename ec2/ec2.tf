@@ -36,7 +36,7 @@ resource "aws_instance" "WORDPRESS" {
 #connect to the WORDPRESS ec2 instance and install WORDPRESS & docker via SSH connection
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update",
+      "sudo apt update",
       "sudo apt install docker.io -y",
       "sudo systemctl restart docker",
       "sudo systemctl enable docker",
