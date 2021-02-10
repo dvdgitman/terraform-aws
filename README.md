@@ -1,6 +1,6 @@
 # terraform-aws
 This is a terraform script that will create a WORDPRESS instance that uses MySQL DB from different EC2 instance using AWS providers and modules.  
-This script will also create 2 subnets and 1 vpn.  
+This script will also create 2 subnets and 1 vpc.  
 a public subnet for Wordpress,  
 and one private subnet for MySQL DB.  
 
