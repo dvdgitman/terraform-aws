@@ -8,7 +8,7 @@ First you will need to install AWS CLI 2 , via the amazon official site.
 
 Use in commend line :
 
-aws configure 
+'''aws configure''' 
 
 Input the following data : 
 
